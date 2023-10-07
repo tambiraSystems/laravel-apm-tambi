@@ -2,6 +2,7 @@
 
 use Done\LaravelAPM\LogWriter;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\Auth;
 
 class RequestWatcher
 {
@@ -22,7 +23,7 @@ class RequestWatcher
             QueryWatcher::getMilliseconds() / 1000,
             'request',
             $name,
-            \Auth::check() ? \Auth::user()->email : request()->ip()
+            Auth::check() ? Auth::user()->email : request()->ip()
         );
     }
 }
